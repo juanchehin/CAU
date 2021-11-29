@@ -23,7 +23,7 @@
 
         public static function ruta(){
             //Local
-			return "http://localhost/cau/cau";
+			return "http://localhost/cau/cau/";
             //Produccion
             //return "http://helpdesk.anderson-bastidas.com/";
 		}
