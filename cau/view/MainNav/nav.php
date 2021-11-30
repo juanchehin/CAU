@@ -7,7 +7,7 @@
 	        </a>
 	    </li>
 	    <li>
-	        <a href="../nuevo-ticket/index.php">
+	        <a href="../NuevoTicket/index.php">
 	            <i class="tag-color grey-blue"></i>
 	            <span class="lbl">Nuevo Ticket</span>
 	        </a>
