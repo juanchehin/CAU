@@ -86,7 +86,7 @@
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
 
-	<?php require_once("../MainJS/js.php") ?>
+	<?php require_once("../MainJS/js.php"); ?>
 	<script type="text/javascript" src="nuevo-ticket.js"></script>
 
 </body>

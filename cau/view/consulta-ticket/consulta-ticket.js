@@ -1,6 +1,7 @@
 var tabla;
-var usu_id = $('#user_idx').val();
+// var usu_id = $('#user_idx').val();
 // var rol_id = $('#rol_idx').val();
+var usu_id = 1;
 var rol_id = 1;
 
 function init() {
@@ -10,10 +11,9 @@ function init() {
 }
 
 $(document).ready(function() {
-
-    $.post("../../controller/usuario.php?op=combo", function(data) {
+    /*$.post("../../controller/usuario.php?op=combo", function(data) {
         $('#usu_asig').html(data);
-    });
+    }); */
 
     if (rol_id == 1) {
         tabla = $('#ticket_data').dataTable({
@@ -124,7 +124,7 @@ $(document).ready(function() {
     }
 
 });
-
+/*
 function ver(tick_id) {
     window.open('http://localhost:80/cau/cau/view/DetalleTicket/?ID=' + tick_id + '');
 }
@@ -155,5 +155,5 @@ function guardar(e) {
         }
     });
 }
-
+*/
 init();

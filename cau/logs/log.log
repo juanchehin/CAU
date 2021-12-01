@@ -1,1 +1,1 @@
-INSERT INTO tm_ticket(usu_id,cat_id,tick_titulo,tick_description,est) VALUES (1,4,'Test soft','<p>ghjg<br></p>','1');
+1
