@@ -35,7 +35,7 @@
 
 			<div class="box-typical box-typical-padding">
 				<p>
-					Desde esta ventana podra generar nuevos tickets de CAU.
+					Desde esta ventana podra generar nuevos tickets.
 				</p>
 
 				<h5 class="m-t-lg with-border">Ingresar Información</h5>
