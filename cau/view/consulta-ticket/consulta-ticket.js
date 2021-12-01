@@ -124,11 +124,12 @@ $(document).ready(function() {
     }
 
 });
-/*
-function ver(tick_id) {
-    window.open('http://localhost:80/cau/cau/view/DetalleTicket/?ID=' + tick_id + '');
-}
 
+function ver(ticket_id) {
+    console.log(ticket_id);
+    // window.open('http://localhost:80/cau/cau/view/DetalleTicket/?ID=' + tick_id + '');
+}
+/*
 function asignar(tick_id) {
     $.post("../../controller/ticket.php?op=mostrar", { tick_id: tick_id }, function(data) {
         data = JSON.parse(data);

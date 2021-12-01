@@ -69,6 +69,8 @@
                 $sub_array[] = $row["ticket_id"];
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
+                // $sub_array[] = $row["fech_crea"];
+                $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
                 
                 /*
                 if ($row["tick_estado"]=="Abierto"){

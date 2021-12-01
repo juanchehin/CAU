@@ -7,7 +7,7 @@
             parent::set_names();
             // $sql="INSERT INTO tm_ticket (tick_id,usu_id,cat_id,tick_titulo,tick_descrip,tick_estado,fech_crea,usu_asig,fech_asig,est) VALUES (NULL,?,?,?,?,'Abierto',now(),NULL,NULL,'1');";
             // $sql="INSERT INTO tm_ticket(tick_id,usu_id,cat_id,tick_titulo,tick_descrip,est) VALUES (NULL,?,?,?,?,'1');";
-            $sql="INSERT INTO tm_ticket(usu_id,cat_id,tick_titulo,tick_description,est) VALUES ($usu_id,$cat_id,'$tick_titulo','$tick_descrip','1');";
+            $sql="INSERT INTO tm_ticket(usu_id,cat_id,tick_titulo,tick_description,fech_crea,est) VALUES ($usu_id,$cat_id,'$tick_titulo','$tick_descrip',now(),'1');";
 
             $sql=$conectar->prepare($sql);
 
@@ -33,6 +33,7 @@
                 tm_ticket.cat_id,
                 tm_ticket.tick_titulo,
                 tm_ticket.tick_description,
+                tm_ticket.fech_crea,
                 tm_ticket.est,
                 tm_categoria.cat_nom
                 FROM
