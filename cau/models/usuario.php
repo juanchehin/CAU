@@ -5,38 +5,35 @@
             $conectar=parent::conexion();
             parent::set_names();
             if(isset($_POST["enviar"])){
-                $correo = $_POST["correo"];
-                $pass = $_POST["pass"];
-                // $rol = $_POST["rol_id"];
+                $correo = $_POST["usu_correo"];
+                $pass = $_POST["usu_pass"];
+                $rol = $_POST["rol_id"];
+
                 if(empty($correo) and empty($pass)){
                     header("Location:".conectar::ruta()."index.php?m=2");
 					exit();
                 }else{
-                    $sql = "SELECT * FROM tm_usuarios WHERE correo='$correo' and pass='$pass' and estado=1";
+                    $sql = "SELECT * FROM tm_usuarios WHERE correo='$correo' and pass='$pass' and rol_id=$rol and estado=1";
 
                     $stmt=$conectar->prepare($sql);
                     $stmt->execute();
 
-                    $resultado = $stmt->fetch();
-                   
+                    $resultado = $stmt->fetch();                   
 
-                    $var = print_r(is_array($resultado)) and (count($resultado)>0);
+                    // $var = print_r(is_array($resultado)) and (count($resultado)>0);
+                    $var = $stmt->RowCount();
 
-                    if ($var){
+                    if ($var == 1){
                         $_SESSION["usu_id"]=$resultado["id"];
                         $_SESSION["usu_nom"]=$resultado["nombres"];
                         $_SESSION["usu_ape"]=$resultado["apellidos"];
-                        // $_SESSION["rol_id"]=$resultado["rol_id"];
-                        header("Location:".Conectar::ruta()."view/Home/");
-                        var_dump($_SESSION);
+                        $_SESSION["rol_id"]=$resultado["rol_id"];
+                        header("Location:".Conectar::ruta()."view/home/");
                         exit(); 
                     }else{
-                        // fwrite($file, "pasa else");
                         header("Location:".Conectar::ruta()."index.php?m=1");
-                        // fclose($file);
                         exit();
                     }
-                    // fclose($file);
                 }
             }
         }

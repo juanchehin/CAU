@@ -1,7 +1,7 @@
 <?php
     require_once("config/conexion.php");
     if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
-        require_once("models/Usuario.php");
+        require_once("models/usuario.php");
         $usuario = new Usuario();
         $usuario->login();
     }

@@ -71,10 +71,10 @@
                     ?>
 
                     <div class="form-group">
-                        <input type="text" id="correo" name="correo" class="form-control" placeholder="E-Mail"/>
+                        <input type="text" id="usu_correo" name="usu_correo" class="form-control" placeholder="E-Mail"/>
                     </div>
                     <div class="form-group">
-                        <input type="password" id="pass" name="pass" class="form-control" placeholder="Password"/>
+                        <input type="password" id="usu_pass" name="usu_pass" class="form-control" placeholder="Password"/>
                     </div>
                     <div class="form-group">
                         <div class="float-right reset">
@@ -114,7 +114,7 @@
 </script>
 <script src="public/js/app.js"></script>
 
-<!-- <script type="text/javascript" src="../cau/public/js/da"></script> -->
+<script type="text/javascript" src="datos.js"></script>
 
 </body>
 </html>

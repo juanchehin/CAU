@@ -15,7 +15,7 @@
                 <div class="site-header-shown">
                     <div class="dropdown user-menu">
                         <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- <img src="../../public/<?php echo $_SESSION["rol_id"] ?>.jpg" alt=""> -->
+                            <img src="../../public/<?php echo $_SESSION["rol_id"] ?>.jpg" alt="">
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
                             <a class="dropdown-item" href="../Perfil/"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
@@ -29,7 +29,7 @@
                 <div class="mobile-menu-right-overlay"></div>
 
                 <input type="hidden" id="user_idx" value="<?php echo $_SESSION["usu_id"] ?>"><!-- ID del Usuario-->
-                <!-- <input type="hidden" id="rol_idx" value="<?php echo $_SESSION["rol_id"] ?>">Rol del Usuario -->
+                <input type="hidden" id="rol_idx" value="<?php echo $_SESSION["rol_id"] ?>"> <!-- Rol del Usuario -->
 
                 <div class="dropdown dropdown-typical">
                     <a href="#" class="dropdown-toggle no-arr">
