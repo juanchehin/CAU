@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li class="blue-dirty">
-                        <a href="..\ConsultarTicket\">
+                        <a href="..\consulta-ticket\">
                             <span class="glyphicon glyphicon-th"></span>
                             <span class="lbl">Consultar Ticket</span>
                         </a>
