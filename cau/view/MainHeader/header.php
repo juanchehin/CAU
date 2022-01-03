@@ -2,7 +2,7 @@
     <div class="container-fluid">
 
         <a href="#" class="site-logo">
-            <img class="hidden-md-down" src="../../public/img/cau-logo.png" alt="" width="150" height="300">
+            <img class="hidden-md-down" src="../../public/img/cau-logo-2.png" alt="" width="150" height="300">
             <img class="hidden-lg-up" src="../../public/img/logo-2-mob.png" alt="">
         </a>
  

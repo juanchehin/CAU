@@ -45,12 +45,12 @@
                 AND tm_usuarios.id=$usu_id";
            
            $sql=$conectar->prepare($sql);
-           // $sql->bindValue(1, $usu_id);
+           $sql->bindValue(1, $usu_id);
            $sql->execute();
 
            return $resultado=$sql->fetchAll();
         }
-/*
+
         public function listar_ticket_x_id($tick_id){
             $conectar= parent::conexion();
             parent::set_names();
@@ -105,7 +105,7 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-
+/*
         public function listar_ticketdetalle_x_ticket($tick_id){
             $conectar= parent::conexion();
             parent::set_names();
