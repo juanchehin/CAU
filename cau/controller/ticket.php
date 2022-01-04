@@ -12,11 +12,6 @@
     switch($_GET["op"]){
 
         case "insert":
-            // $file = fopen("../logs/log.log", "w");
- 
-            // fwrite($file,"Entra insert case");
- 
-            // fclose($file);
 
             $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);
             
@@ -48,8 +43,6 @@
             }
             echo json_encode($datos);
 
-            // var_dump($datos);
-            // die();
         break;
 
         case "update":
@@ -71,21 +64,16 @@
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
                 $sub_array[] = $row["fech_crea"];
-                $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+                // $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
 
-                // $file = fopen("../logs/log.log", "w");
-                // fwrite($file, $row["tick_estado"]); 
-                // fclose($file);
-                
-                
-                if (isset($row["tick_estado"]) and $row["tick_estado"]=="Abierto"){
+                if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
                     $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
                 }
 
-                $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-
+                // $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+               
 
                 /*if($row["fech_asig"]==null){
                     $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
@@ -104,6 +92,7 @@
                 
 
                 $sub_array[] = '<button type="button" onClick="ver('.$row["ticket_id"].');"  id="'.$row["ticket_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+                
                 $data[] = $sub_array;
             }
 

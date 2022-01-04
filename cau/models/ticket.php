@@ -34,7 +34,8 @@
                 tm_ticket.tick_titulo,
                 tm_ticket.tick_description,
                 tm_ticket.fech_crea,
-                tm_ticket.est,
+                -- tm_ticket.est,
+                tm_ticket.tick_estado,
                 tm_categoria.cat_nom
                 FROM
                 tm_ticket

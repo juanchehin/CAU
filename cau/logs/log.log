@@ -1,0 +1,9 @@
+Array
+(
+    [0] => 5
+    [1] => Hardware
+    [2] => Titulo con fecha
+    [3] => 2021-12-01 20:37:33
+    [4] => <span class="label label-pill label-success">Abierto</span>
+    [5] => <button type="button" onClick="ver(5);"  id="5" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>
+)
