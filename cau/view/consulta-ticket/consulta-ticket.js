@@ -127,7 +127,7 @@ $(document).ready(function() {
 
 function ver(ticket_id) {
     console.log(ticket_id);
-    // window.open('http://localhost:80/cau/cau/view/DetalleTicket/?ID=' + tick_id + '');
+    window.open('http://localhost:80/cau/cau/view/detalle-ticket/?ID=' + ticket_id + '');
 }
 /*
 function asignar(tick_id) {
