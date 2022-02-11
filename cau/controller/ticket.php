@@ -198,16 +198,17 @@
 
         case "mostrar";
 
-            $datos=$ticket->listar_ticket_x_id($_POST["tick_id"]);  
+            $datos=$ticket->listar_ticket_x_id($_POST["tick_id"]);
+
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
                 {
-                    $output["tick_id"] = $row["tick_id"];
+                    $output["ticket_id"] = $row["ticket_id"];
                     $output["usu_id"] = $row["usu_id"];
                     $output["cat_id"] = $row["cat_id"];
 
                     $output["tick_titulo"] = $row["tick_titulo"];
-                    $output["tick_descrip"] = $row["tick_descrip"];
+                    $output["tick_description"] = $row["tick_description"];
 
                     if ($row["tick_estado"]=="Abierto"){
                         $output["tick_estado"] = '<span class="label label-pill label-success">Abierto</span>';
@@ -218,12 +219,11 @@
                     $output["tick_estado_texto"] = $row["tick_estado"];
 
                     $output["fech_crea"] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-                    $output["usu_nom"] = $row["usu_nom"];
-                    $output["usu_ape"] = $row["usu_ape"];
+                    $output["nombres"] = $row["nombres"];
+                    $output["apellidos"] = $row["apellidos"];
                     $output["cat_nom"] = $row["cat_nom"];
                 }
 
-               
                 echo json_encode($output);
             }   
         break;

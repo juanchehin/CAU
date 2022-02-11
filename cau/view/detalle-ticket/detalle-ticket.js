@@ -168,17 +168,16 @@ function listardetalle(tick_id) {
     });
 
     $.post("../../controller/ticket.php?op=mostrar", { tick_id: tick_id }, function(data) {
-        console.log("data es : ", data);
         data = JSON.parse(data);
         $('#lblestado').html(data.tick_estado);
-        $('#lblnomusuario').html(data.usu_nom + ' ' + data.usu_ape);
+        $('#lblnomusuario').html(data.nombres + ' ' + data.apellidos);
         $('#lblfechcrea').html(data.fech_crea);
 
-        $('#lblnomidticket').html("Detalle Ticket - " + data.tick_id);
+        $('#lblnomidticket').html("Detalle Ticket - " + data.ticket_id);
 
         $('#cat_nom').val(data.cat_nom);
         $('#tick_titulo').val(data.tick_titulo);
-        $('#tickd_descripusu').summernote('code', data.tick_descrip);
+        $('#tickd_descripusu').summernote('code', data.tick_description);
 
         console.log(data.tick_estado_texto);
         if (data.tick_estado_texto == "Cerrado") {
