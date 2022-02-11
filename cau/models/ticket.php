@@ -53,11 +53,6 @@
         }
 
         public function listar_ticket_x_id($tick_id){
-            // $file = fopen("../logs/log.log", "w");
- 
-            // fwrite($file, "pasa listar_ticket_x_id");
-
-            // fclose($file);
 
             $conectar= parent::conexion();
             parent::set_names();
@@ -79,12 +74,6 @@
                 WHERE
                 tm_ticket.est = 1
                 AND tm_ticket.ticket_id = $tick_id";
-
-$file = fopen("../logs/log.log", "w");
- 
-fwrite($file, $sql);
-
-fclose($file);
 
             $sql=$conectar->prepare($sql);
             // $sql->bindValue(1, $tick_id);
@@ -152,18 +141,18 @@ fclose($file);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-
+*/
         public function insert_ticketdetalle_cerrar($tick_id,$usu_id){
             $conectar= parent::conexion();
             parent::set_names();
-                $sql="call sp_i_ticketdetalle_01(?,?)";
+                $sql="call sp_i_ticketdetalle_01($tick_id,$usu_id)";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $tick_id);
-            $sql->bindValue(2, $usu_id);
+            // $sql->bindValue(1, $tick_id);
+            // $sql->bindValue(2, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-*/
+
 
         public function update_ticket($tick_id){
 
