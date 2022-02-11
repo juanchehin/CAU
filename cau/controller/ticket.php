@@ -197,6 +197,7 @@
         break;
 
         case "mostrar";
+
             $datos=$ticket->listar_ticket_x_id($_POST["tick_id"]);  
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
@@ -221,6 +222,8 @@
                     $output["usu_ape"] = $row["usu_ape"];
                     $output["cat_nom"] = $row["cat_nom"];
                 }
+
+               
                 echo json_encode($output);
             }   
         break;
