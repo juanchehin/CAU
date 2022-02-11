@@ -15,13 +15,14 @@
 
         case "listar":
             $datos=$usuario->get_usuario();
+
             $data= Array();
             foreach($datos as $row){
                 $sub_array = array();
-                $sub_array[] = $row["usu_nom"];
-                $sub_array[] = $row["usu_ape"];
-                $sub_array[] = $row["usu_correo"];
-                $sub_array[] = $row["usu_pass"];
+                $sub_array[] = $row["nombres"];
+                $sub_array[] = $row["apellidos"];
+                $sub_array[] = $row["correo"];
+                $sub_array[] = $row["pass"];
 
                 if ($row["rol_id"]=="1"){
                     $sub_array[] = '<span class="label label-pill label-success">Usuario</span>';
@@ -29,8 +30,8 @@
                     $sub_array[] = '<span class="label label-pill label-info">Soporte</span>';
                 }
 
-                $sub_array[] = '<button type="button" onClick="editar('.$row["usu_id"].');"  id="'.$row["usu_id"].'" class="btn btn-inline btn-warning btn-sm ladda-button"><i class="fa fa-edit"></i></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row["usu_id"].');"  id="'.$row["usu_id"].'" class="btn btn-inline btn-danger btn-sm ladda-button"><i class="fa fa-trash"></i></button>';
+                $sub_array[] = '<button type="button" onClick="editar('.$row["id"].');"  id="'.$row["id"].'" class="btn btn-inline btn-warning btn-sm ladda-button"><i class="fa fa-edit"></i></button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row["id"].');"  id="'.$row["id"].'" class="btn btn-inline btn-danger btn-sm ladda-button"><i class="fa fa-trash"></i></button>';
                 $data[] = $sub_array;
             }
 
