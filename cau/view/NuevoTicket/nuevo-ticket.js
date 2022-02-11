@@ -19,7 +19,7 @@ function init() {
 function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-    console.log("formData es : ", formData);
+
     if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val() == '') {
         swal("Advertencia!", "Campos Vacios", "warning");
     } else {
