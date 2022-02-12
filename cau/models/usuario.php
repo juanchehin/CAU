@@ -41,7 +41,18 @@
         public function insert_usuario($usu_nom,$usu_ape,$usu_correo,$usu_pass,$rol_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="INSERT INTO tm_usuario (id, nombres, apellidos, correo, pass, rol_id, created_at, updated_at, deleted_at, estado) VALUES (NULL,$usu_nom,$usu_ape,$usu_correo,MD5($usu_pass),$rol_id,now(), NULL, NULL, '1');";
+            $sql="INSERT INTO tm_usuarios 
+                (id, 
+                nombres, 
+                apellidos, 
+                correo, 
+                pass, 
+                rol_id, 
+                created_at, 
+                updated_at, 
+                deleted_at, 
+                estado) VALUES 
+                (NULL,'$usu_nom','$usu_ape','$usu_correo',MD5('$usu_pass'),$rol_id,now(), NULL, NULL, '1');";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();

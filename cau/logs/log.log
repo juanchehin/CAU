@@ -1,11 +1,15 @@
 PDOStatement Object
 (
-    [queryString] => UPDATE tm_usuarios set
-                nombres = test2,
-                apellidos = test2,
-                correo = test32@test.com,
-                pass = test2,
-                rol_id = 2
-                WHERE
-                id = 2
+    [queryString] => INSERT INTO tm_usuarios 
+                (id, 
+                nombres, 
+                apellidos, 
+                correo, 
+                pass, 
+                rol_id, 
+                created_at, 
+                updated_at, 
+                deleted_at, 
+                estado) VALUES 
+                (NULL,'Julio','Iglesias','ju@gmail.com',MD5('1234'),1,now(), NULL, NULL, '1');
 )
