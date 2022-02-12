@@ -52,11 +52,11 @@
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
                 {
-                    $output["usu_id"] = $row["usu_id"];
-                    $output["usu_nom"] = $row["usu_nom"];
-                    $output["usu_ape"] = $row["usu_ape"];
-                    $output["usu_correo"] = $row["usu_correo"];
-                    $output["usu_pass"] = $row["usu_pass"];
+                    $output["usu_id"] = $row["id"];
+                    $output["usu_nom"] = $row["nombres"];
+                    $output["usu_ape"] = $row["apellidos"];
+                    $output["usu_correo"] = $row["correo"];
+                    $output["usu_pass"] = $row["pass"];
                     $output["rol_id"] = $row["rol_id"];
                 }
                 echo json_encode($output);
