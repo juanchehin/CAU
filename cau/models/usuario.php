@@ -116,9 +116,9 @@
         public function get_usuario_total_x_id($usu_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where usu_id = ?";
+            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where usu_id = $usu_id";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_id);
+            // $sql->bindValue(1, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -126,9 +126,9 @@
         public function get_usuario_totalabierto_x_id($usu_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where usu_id = ? and tick_estado='Abierto'";
+            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where usu_id = $usu_id and tick_estado='Abierto'";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_id);
+            // $sql->bindValue(1, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -136,9 +136,9 @@
         public function get_usuario_totalcerrado_x_id($usu_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where usu_id = ? and tick_estado='Cerrado'";
+            $sql="SELECT COUNT(*) as TOTAL FROM tm_ticket where usu_id = $usu_id and tick_estado='Cerrado'";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_id);
+            // $sql->bindValue(1, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -147,16 +147,16 @@
             $conectar= parent::conexion();
             parent::set_names();
             $sql="SELECT tm_categoria.cat_nom as nom,COUNT(*) AS total
-                FROM   tm_ticket  JOIN  
+                FROM tm_ticket JOIN  
                     tm_categoria ON tm_ticket.cat_id = tm_categoria.cat_id  
                 WHERE    
                 tm_ticket.est = 1
-                and tm_ticket.usu_id = ?
+                and tm_ticket.usu_id = $usu_id
                 GROUP BY 
                 tm_categoria.cat_nom 
                 ORDER BY total DESC";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_id);
+            // $sql->bindValue(1, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         } 
