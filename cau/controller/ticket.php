@@ -58,13 +58,13 @@
             $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"]);
             $data= Array();
 
+            file_put_contents('../logs/log.log', print_r($datos, true));
+
             foreach($datos as $row){
                 $sub_array = array();
                 $sub_array[] = $row["ticket_id"];
                 $sub_array[] = $row["cat_nom"];
                 $sub_array[] = $row["tick_titulo"];
-                $sub_array[] = $row["fech_crea"];
-                // $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
 
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
@@ -72,23 +72,22 @@
                     $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
                 }
 
-                // $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-               
+                $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));               
 
-                /*if($row["fech_asig"]==null){
+                if($row["fech_asig"]==null){
                     $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
                 }else{
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
                 }
 
                 if($row["usu_asig"]==null){
-                    $sub_array[] = '<span class="label label-pill label-warning">Sin Asignar</span>';
+                    $sub_array[] = '<a onClick="asignar(' . $row["ticket_id"] . ')" ><span class="label label-pill label-warning">Sin Asignar</span></a>';
                 }else{
                     $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                     foreach($datos1 as $row1){
-                        $sub_array[] = '<span class="label label-pill label-success">'. $row1["usu_nom"].'</span>';
+                        $sub_array[] = '<span class="label label-pill label-success">'. $row1["nombres"].'</span>';
                     }
-                }*/
+                }
                 
 
                 $sub_array[] = '<button type="button" onClick="ver('.$row["ticket_id"].');"  id="'.$row["ticket_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
