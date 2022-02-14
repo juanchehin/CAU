@@ -11,9 +11,10 @@ function init() {
 }
 
 $(document).ready(function() {
-    /*$.post("../../controller/usuario.php?op=combo", function(data) {
+    $.post("../../controller/usuario.php?op=combo", function(data) {
+        console.log("data es : ", data);
         $('#usu_asig').html(data);
-    }); */
+    });
 
     if (rol_id == 1) {
         tabla = $('#ticket_data').dataTable({
@@ -129,11 +130,12 @@ function ver(ticket_id) {
     console.log(ticket_id);
     window.open('http://localhost:80/cau/cau/view/detalle-ticket/?ID=' + ticket_id + '');
 }
-/*
+
 function asignar(tick_id) {
+
     $.post("../../controller/ticket.php?op=mostrar", { tick_id: tick_id }, function(data) {
         data = JSON.parse(data);
-        $('#tick_id').val(data.tick_id);
+        $('#tick_id').val(data.ticket_id);
 
         $('#mdltitulo').html('Asignar Agente');
         $("#modalasignar").modal('show');
@@ -144,6 +146,7 @@ function asignar(tick_id) {
 function guardar(e) {
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
+
     $.ajax({
         url: "../../controller/ticket.php?op=asignar",
         type: "POST",
@@ -156,5 +159,5 @@ function guardar(e) {
         }
     });
 }
-*/
+
 init();

@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	<!-- Contenido -->
-	
+	<?php require_once("modalasignar.php"); ?>
 
 	<?php require_once("../MainJS/js.php"); ?>
 	<script type="text/javascript" src="consulta-ticket.js"></script>

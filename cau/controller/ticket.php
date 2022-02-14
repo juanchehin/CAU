@@ -1,6 +1,6 @@
 <?php
     require_once("../config/conexion.php");
-    require_once("../models/Ticket.php");
+    require_once("../models/ticket.php");
     $ticket = new Ticket();
 
     require_once("../models/Usuario.php");
@@ -57,8 +57,6 @@
         case "listar_x_usu":
             $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"]);
             $data= Array();
-
-            file_put_contents('../logs/log.log', print_r($datos, true));
 
             foreach($datos as $row){
                 $sub_array = array();

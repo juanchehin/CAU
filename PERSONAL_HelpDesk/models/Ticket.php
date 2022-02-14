@@ -161,17 +161,29 @@
         }
 
         public function update_ticket_asignacion($tick_id,$usu_asig){
+            $file = fopen("../logs/log.log", "w");
+ 
+            fwrite($file, "update_ticket_asignacion");
+ 
+            fclose($file);
+
             $conectar= parent::conexion();
             parent::set_names();
             $sql="update tm_ticket 
                 set	
-                    usu_asig = ?,
+                    usu_asig = $usu_asig,
                     fech_asig = now()
                 where
-                    tick_id = ?";
+                    ticket_id = $tick_id";
+
+                    
+            file_put_contents('../logs/log.log', print_r($sql, true));
+
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_asig);
-            $sql->bindValue(2, $tick_id);
+
+
+            // $sql->bindValue(1, $usu_asig);
+            // $sql->bindValue(2, $tick_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }

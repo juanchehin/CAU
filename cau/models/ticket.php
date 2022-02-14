@@ -5,16 +5,33 @@
 
             $conectar= parent::conexion();
             parent::set_names();
-            // $sql="INSERT INTO tm_ticket (tick_id,usu_id,cat_id,tick_titulo,tick_descrip,tick_estado,fech_crea,usu_asig,fech_asig,est) VALUES (NULL,?,?,?,?,'Abierto',now(),NULL,NULL,'1');";
-            // $sql="INSERT INTO tm_ticket(tick_id,usu_id,cat_id,tick_titulo,tick_descrip,est) VALUES (NULL,?,?,?,?,'1');";
-            $sql="INSERT INTO tm_ticket(usu_id,cat_id,tick_titulo,tick_description,fech_crea,est) VALUES ($usu_id,$cat_id,'$tick_titulo','$tick_descrip',now(),'1');";
+            $sql="INSERT INTO 
+            tm_ticket (
+                ticket_id,
+                usu_id,
+                cat_id,
+                tick_titulo,
+                tick_description,
+                est,
+                fech_crea,
+                tick_estado,
+                usu_asig,
+                fech_asig
+                ) 
+            VALUES (
+                NULL,
+                $usu_id,
+                $cat_id,
+                '$tick_titulo',
+                '$tick_descrip',
+                '1',
+                now(),
+                'Abierto',
+                NULL,
+                NULL                
+                );";
 
             $sql=$conectar->prepare($sql);
-
-            // $sql->bindValue(1, $usu_id);
-            // $sql->bindValue(2, $cat_id);
-            // $sql->bindValue(3, $tick_titulo);
-            // $sql->bindValue(4, $tick_descrip);
 
             $sql->execute();
             
@@ -33,9 +50,14 @@
                 tm_ticket.cat_id,
                 tm_ticket.tick_titulo,
                 tm_ticket.tick_description,
-                tm_ticket.fech_crea,
-                -- tm_ticket.est,
                 tm_ticket.tick_estado,
+                tm_ticket.fech_crea,
+                tm_ticket.usu_asig,
+                tm_ticket.fech_asig,
+                tm_usuarios.nombres,
+                tm_usuarios.apellidos,
+                -- tm_ticket.est,
+                -- tm_ticket.tick_estado,
                 tm_categoria.cat_nom
                 FROM
                 tm_ticket
@@ -89,7 +111,7 @@
                 tm_ticket.usu_id,
                 tm_ticket.cat_id,
                 tm_ticket.tick_titulo,
-                tm_ticket.tick_descrip,
+                tm_ticket.tick_description,
                 tm_ticket.tick_estado,
                 tm_ticket.fech_crea,
                 tm_ticket.usu_asig,
@@ -100,7 +122,7 @@
                 FROM 
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
-                INNER join tm_usuario on tm_ticket.usu_id = tm_usuario.usu_id
+                INNER join tm_usuarios on tm_ticket.usu_id = tm_usuarios.id
                 WHERE
                 tm_ticket.est = 1
                 ";
@@ -169,23 +191,23 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-/*
+
         public function update_ticket_asignacion($tick_id,$usu_asig){
+            
             $conectar= parent::conexion();
             parent::set_names();
             $sql="update tm_ticket 
                 set	
-                    usu_asig = ?,
+                    usu_asig = $usu_asig,
                     fech_asig = now()
                 where
-                    tick_id = ?";
+                    ticket_id = $tick_id";
+
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_asig);
-            $sql->bindValue(2, $tick_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-
+/*
         public function get_ticket_total(){
             $conectar= parent::conexion();
             parent::set_names();

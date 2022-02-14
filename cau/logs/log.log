@@ -1,15 +1,5 @@
-PDOStatement Object
+Array
 (
-    [queryString] => INSERT INTO tm_usuarios 
-                (id, 
-                nombres, 
-                apellidos, 
-                correo, 
-                pass, 
-                rol_id, 
-                created_at, 
-                updated_at, 
-                deleted_at, 
-                estado) VALUES 
-                (NULL,'Julio','Iglesias','ju@gmail.com',MD5('1234'),1,now(), NULL, NULL, '1');
+    [tick_id] => 3
+    [usu_asig] => 5
 )
