@@ -41,10 +41,10 @@ function guardaryeditar(e) {
     if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val() == '') {
         swal("Advertencia!", "Campos Vacios", "warning");
     } else {
-        // var totalfiles = $('#fileElem').val().length;
-        /*for (var i = 0; i < totalfiles; i++) {
+        var totalfiles = $('#fileElem').val().length;
+        for (var i = 0; i < totalfiles; i++) {
             formData.append("files[]", $('#fileElem')[0].files[i]);
-        }*/
+        }
 
 
         $.ajax({

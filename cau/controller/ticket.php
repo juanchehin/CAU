@@ -6,8 +6,8 @@
     require_once("../models/Usuario.php");
     $usuario = new Usuario();
 
-    // require_once("../models/Documento.php");
-    // $documento = new Documento();
+    require_once("../models/documento.php");
+    $documento = new Documento();
 
     switch($_GET["op"]){
 
@@ -16,7 +16,7 @@
             $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);
             
             if (is_array($datos)==true and count($datos)>0){
-                /*foreach ($datos as $row){
+                foreach ($datos as $row){
                     $output["tick_id"] = $row["tick_id"];
 
                     if ($_FILES['files']['name']==0){
@@ -39,7 +39,7 @@
                             move_uploaded_file($doc1,$destino);
                         }
                     }
-                }*/
+                }
             }
             echo json_encode($datos);
 
