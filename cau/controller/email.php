@@ -4,6 +4,7 @@
     require_once("../models/email.php");
     $email = new Email();
 
+    
     /* opciones del controlador */
     switch ($_GET["op"]) {
         /*  enviar ticket abierto con el ID */

@@ -3,10 +3,10 @@
 require('class.phpmailer.php');
 include("class.smtp.php");
 
-include("../.env.php");
+// include("../.env.php");
 
-$gCorreo= $email;
-$gContrasena=$pass;
+// $gCorreo= $email;
+// $gContrasena=$pass;
 
 /* llamada de las clases necesarias que se usaran en el envio del mail */
 require_once("../config/conexion.php");
@@ -15,128 +15,155 @@ require_once("../models/ticket.php");
 class Email extends PHPMailer{
 
     //variable que contiene el correo del destinatario
-    // protected $gCorreo = 'aqui tu correo@dominio.com';
+    public $gCorreo = "";
     // protected $gContrasena = 'aqui tu pass';
-    //variable que contiene la contraseña del destinatario
+    public $gContrasena = "";
+    
 
     public function ticket_abierto($tick_id){
         $ticket = new Ticket();
+
         $datos = $ticket->listar_ticket_x_id($tick_id);
 
-        file_put_contents('../logs/log.log', print_r($datos, true));
-
         foreach ($datos as $row){
-            $id = $row["tick_id"];
-            $usu = $row["usu_nom"];
+            $id = $row["ticket_id"];
+            $usu = $row["nombres"];
             $titulo = $row["tick_titulo"];
             $categoria = $row["cat_nom"];
-            $correo = $row["usu_correo"];
+            $correo = $row["correo"];
         }
 
-        //IGual//
-        $this->IsSMTP();
-        $this->Host = 'smtp.gmail.com';//Aqui el server
-        $this->Port = 587;//Aqui el puerto
-        $this->SMTPAuth = true;
-        $this->Username = $this->gCorreo;
-        $this->Password = $this->gContrasena;
-        $this->From = $this->gCorreo;
-        $this->SMTPSecure = 'tls';
-        $this->FromName = $this->tu_nombre = "Ticket Abierto ".$id;
-        $this->CharSet = 'UTF8';
-        $this->addAddress($correo);
-        $this->WordWrap = 50;
-        $this->IsHTML(true);
-        $this->Subject = "Ticket Abierto";
-        //Igual//
-        $cuerpo = file_get_contents('../public/NuevoTicket.html'); /* Ruta del template en formato HTML */
-        /* parametros del template a remplazar */
-        $cuerpo = str_replace("xnroticket", $id, $cuerpo);
-        $cuerpo = str_replace("lblNomUsu", $usu, $cuerpo);
-        $cuerpo = str_replace("lblTitu", $titulo, $cuerpo);
-        $cuerpo = str_replace("lblCate", $categoria, $cuerpo);
+        $mail = new PHPMailer(true);
 
-        $this->Body = $cuerpo;
-        $this->AltBody = strip_tags("Ticket Abierto");
-        return $this->Send();
+        try {
+
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = $this->gCorreo;                     //SMTP username
+            $mail->Password   = $this->gContrasena;                    //SMTP password'';                               //SMTP password
+            $mail->SMTPSecure = 'ssl'; 
+            $mail->Port       = 465;  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+  
+            //Recipients
+            $mail->setFrom($this->gCorreo);
+            
+            $mail->addAddress($correo);     //Add a recipient
+          
+              //Content
+            $mail->isHTML(true);
+            $mail->Subject = "Ticket Abierto";
+            $cuerpo = file_get_contents('../public/NuevoTicket.html');
+
+            $cuerpo = str_replace("xnroticket", $id, $cuerpo);
+            $cuerpo = str_replace("lblNomUsu", $usu, $cuerpo);
+            $cuerpo = str_replace("lblTitu", $titulo, $cuerpo);
+            $cuerpo = str_replace("lblCate", $categoria, $cuerpo);
+
+            $mail->Body = $cuerpo;
+            $mail->AltBody = strip_tags("Ticket Abierto");
+            return $mail->Send();
+  
+          }catch (Exception $e) {
+              echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
     public function ticket_cerrado($tick_id){
         $ticket = new Ticket();
         $datos = $ticket->listar_ticket_x_id($tick_id);
+
         foreach ($datos as $row){
-            $id = $row["tick_id"];
-            $usu = $row["usu_nom"];
+            $id = $row["ticket_id"];
+            $usu = $row["nombres"];
             $titulo = $row["tick_titulo"];
             $categoria = $row["cat_nom"];
             $correo = $row["usu_correo"];
         }
 
-        //IGual//
-        $this->IsSMTP();
-        $this->Host = 'smtp.gmail.com';//Aqui el server
-        $this->Port = 587;//Aqui el puerto
-        $this->SMTPAuth = true;
-        $this->Username = $this->gCorreo;
-        $this->Password = $this->gContrasena;
-        $this->From = $this->gCorreo;
-        $this->SMTPSecure = 'tls';
-        $this->FromName = $this->tu_nombre = "Ticket Cerrado ".$id;
-        $this->CharSet = 'UTF8';
-        $this->addAddress($correo);
-        $this->WordWrap = 50;
-        $this->IsHTML(true);
-        $this->Subject = "Ticket Cerrado";
-        //Igual//
-        $cuerpo = file_get_contents('../public/CerradoTicket.html'); /* Ruta del template en formato HTML */
-        /* parametros del template a remplazar */
-        $cuerpo = str_replace("xnroticket", $id, $cuerpo);
-        $cuerpo = str_replace("lblNomUsu", $usu, $cuerpo);
-        $cuerpo = str_replace("lblTitu", $titulo, $cuerpo);
-        $cuerpo = str_replace("lblCate", $categoria, $cuerpo);
+        $mail = new PHPMailer(true);
 
-        $this->Body = $cuerpo;
-        $this->AltBody = strip_tags("Ticket Cerrado");
-        return $this->Send();
+        try {
+
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = $this->gCorreo;                     //SMTP username
+            $mail->Password   = $this->gContrasena;                    //SMTP password'';                               //SMTP password
+            $mail->SMTPSecure = 'ssl'; 
+            $mail->Port       = 465;  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+  
+            //Recipients
+            $mail->setFrom($this->gCorreo);
+            
+            $mail->addAddress($correo);     //Add a recipient
+          
+              //Content
+            $mail->isHTML(true);
+            $mail->Subject = "Ticket Cerrado";
+            $cuerpo = file_get_contents('../public/CerradoTicket.html');
+            // $cuerpo = str_replace('$tbldetalle', $tbody, $cuerpo);
+
+            $cuerpo = str_replace("xnroticket", $id, $cuerpo);
+            $cuerpo = str_replace("lblNomUsu", $usu, $cuerpo);
+            $cuerpo = str_replace("lblTitu", $titulo, $cuerpo);
+            $cuerpo = str_replace("lblCate", $categoria, $cuerpo);
+
+            $mail->Body = $cuerpo;
+            $mail->AltBody = strip_tags("Ticket Cerrado");
+            return $mail->Send();
+  
+          }catch (Exception $e) {
+              echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
     public function ticket_asignado($tick_id){
         $ticket = new Ticket();
         $datos = $ticket->listar_ticket_x_id($tick_id);
         foreach ($datos as $row){
-            $id = $row["tick_id"];
-            $usu = $row["usu_nom"];
+            $id = $row["ticket_id"];
+            $usu = $row["nombres"];
             $titulo = $row["tick_titulo"];
             $categoria = $row["cat_nom"];
             $correo = $row["usu_correo"];
         }
 
-        //IGual//
-        $this->IsSMTP();
-        $this->Host = 'smtp.office365.com';//Aqui el server
-        $this->Port = 587;//Aqui el puerto
-        $this->SMTPAuth = true;
-        $this->Username = $this->gCorreo;
-        $this->Password = $this->gContrasena;
-        $this->From = $this->gCorreo;
-        $this->SMTPSecure = 'tls';
-        $this->FromName = $this->tu_nombre = "Ticket Asignado ".$id;
-        $this->CharSet = 'UTF8';
-        $this->addAddress($correo);
-        $this->WordWrap = 50;
-        $this->IsHTML(true);
-        $this->Subject = "Ticket Asignado";
-        //Igual//
-        $cuerpo = file_get_contents('../public/AsignarTicket.html'); /* Ruta del template en formato HTML */
-        /* parametros del template a remplazar */
-        $cuerpo = str_replace("xnroticket", $id, $cuerpo);
-        $cuerpo = str_replace("lblNomUsu", $usu, $cuerpo);
-        $cuerpo = str_replace("lblTitu", $titulo, $cuerpo);
-        $cuerpo = str_replace("lblCate", $categoria, $cuerpo);
+        $mail = new PHPMailer(true);
 
-        $this->Body = $cuerpo;
-        $this->AltBody = strip_tags("Ticket Asignado");
-        return $this->Send();
+        try {
+
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = $this->gCorreo;                     //SMTP username
+            $mail->Password   = $this->gContrasena;                    //SMTP password'';                               //SMTP password
+            $mail->SMTPSecure = 'ssl'; 
+            $mail->Port       = 465;  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+  
+            //Recipients
+            $mail->setFrom($this->gCorreo);
+            
+            $mail->addAddress($correo);     //Add a recipient
+          
+              //Content
+            $mail->isHTML(true);
+            $mail->Subject = "Ticket Asignado";
+            $cuerpo = file_get_contents('../public/AsignarTicket.html');
+            // $cuerpo = str_replace('$tbldetalle', $tbody, $cuerpo);
+
+            $cuerpo = str_replace("xnroticket", $id, $cuerpo);
+            $cuerpo = str_replace("lblNomUsu", $usu, $cuerpo);
+            $cuerpo = str_replace("lblTitu", $titulo, $cuerpo);
+            $cuerpo = str_replace("lblCate", $categoria, $cuerpo);
+
+            $mail->Body = $cuerpo;
+            $mail->AltBody = strip_tags("Ticket Asignado");
+            return $mail->Send();
+  
+          }catch (Exception $e) {
+              echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
 }

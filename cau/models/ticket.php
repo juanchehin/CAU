@@ -87,6 +87,7 @@
                 tm_ticket.tick_estado,
                 tm_ticket.fech_crea,
                 tm_usuarios.nombres,
+                tm_usuarios.correo,
                 tm_usuarios.apellidos,
                 tm_categoria.cat_nom
                 FROM 

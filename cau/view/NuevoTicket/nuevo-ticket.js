@@ -52,9 +52,10 @@ function guardaryeditar(e) {
             contentType: false,
             processData: false,
             success: function(data) {
-                console.log(data);
+                console.log("data es : ", data);
                 data = JSON.parse(data);
-                console.log(data[0].tick_id);
+
+                // console.log(data[0].tick_id);
 
                 $.post("../../controller/email.php?op=ticket_abierto", { tick_id: data[0].tick_id }, function(data) {
 
