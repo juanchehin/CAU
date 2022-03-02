@@ -1,5 +1,27 @@
 Array
 (
-    [tick_id] => 3
-    [usu_asig] => 5
+    [0] => Array
+        (
+            [ticket_id] => 15
+            [0] => 15
+            [usu_id] => 1
+            [1] => 1
+            [cat_id] => 1
+            [2] => 1
+            [tick_titulo] => prueba de mail 2
+            [3] => prueba de mail 2
+            [tick_description] => <p>prueba de mail 2<br></p>
+            [4] => <p>prueba de mail 2<br></p>
+            [tick_estado] => Abierto
+            [5] => Abierto
+            [fech_crea] => 2022-03-02 08:40:59
+            [6] => 2022-03-02 08:40:59
+            [nombres] => test
+            [7] => test
+            [apellidos] => testAp
+            [8] => testAp
+            [cat_nom] => Hardware
+            [9] => Hardware
+        )
+
 )

@@ -37,8 +37,7 @@ function init() {
 function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-
-    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val() == '') {
+    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val() == '' || $('#cats_id').val() == 0 || $('#cat_id').val() == 0 || $('#prio_id').val() == 0) {
         swal("Advertencia!", "Campos Vacios", "warning");
     } else {
         var totalfiles = $('#fileElem').val().length;
@@ -46,15 +45,25 @@ function guardaryeditar(e) {
             formData.append("files[]", $('#fileElem')[0].files[i]);
         }
 
-
         $.ajax({
             url: "../../controller/ticket.php?op=insert",
             type: "POST",
             data: formData,
             contentType: false,
             processData: false,
-            success: function(datos) {
-                console.log(datos);
+            success: function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+                console.log(data[0].tick_id);
+
+                $.post("../../controller/email.php?op=ticket_abierto", { tick_id: data[0].tick_id }, function(data) {
+
+                });
+
+                // $.post("../../controller/whatsapp.php?op=w_ticket_abierto", { tick_id: data[0].tick_id }, function(data) {
+
+                // });
+
                 $('#tick_titulo').val('');
                 $('#tick_descrip').summernote('reset');
                 swal("Correcto!", "Registrado Correctamente", "success");
@@ -62,5 +71,6 @@ function guardaryeditar(e) {
         });
     }
 }
+
 
 init();
