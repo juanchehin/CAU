@@ -6,12 +6,12 @@
     switch($_GET["op"]){
         case "guardaryeditar":
             if(empty($_POST["usu_id"])){       
-                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"]);     
+                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"],$_POST["usu_telf"]);     
             }
             else {
-                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"]);
+                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"],$_POST["usu_telf"]);
             }
-        break;
+            break;
 
         case "listar":
             $datos=$usuario->get_usuario();
@@ -40,11 +40,11 @@
                 "iTotalDisplayRecords"=>count($data),
                 "aaData"=>$data);
             echo json_encode($results);
-        break;
+            break;
 
         case "eliminar":
             $usuario->delete_usuario($_POST["usu_id"]);
-        break;
+            break;
 
         case "mostrar";
             $datos=$usuario->get_usuario_x_id($_POST["usu_id"]);  
@@ -57,10 +57,11 @@
                     $output["usu_correo"] = $row["usu_correo"];
                     $output["usu_pass"] = $row["usu_pass"];
                     $output["rol_id"] = $row["rol_id"];
+                    $output["usu_telf"] = $row["usu_telf"];
                 }
                 echo json_encode($output);
             }   
-        break;
+            break;
 
         case "total";
             $datos=$usuario->get_usuario_total_x_id($_POST["usu_id"]);  
@@ -71,7 +72,7 @@
                 }
                 echo json_encode($output);
             }
-        break;
+            break;
 
         case "totalabierto";
             $datos=$usuario->get_usuario_totalabierto_x_id($_POST["usu_id"]);  
@@ -82,7 +83,7 @@
                 }
                 echo json_encode($output);
             }
-        break;
+            break;
 
         case "totalcerrado";
             $datos=$usuario->get_usuario_totalcerrado_x_id($_POST["usu_id"]);  
@@ -93,12 +94,12 @@
                 }
                 echo json_encode($output);
             }
-        break;
+            break;
 
         case "grafico";
             $datos=$usuario->get_usuario_grafico($_POST["usu_id"]);  
             echo json_encode($datos);
-        break;
+            break;
 
         case "combo";
             $datos = $usuario->get_usuario_x_rol();
@@ -110,8 +111,11 @@
                 }
                 echo $html;
             }
-        break;
+            break;
+        /* Controller para actualizar contraseña */
+        case "password":
+            $usuario->update_usuario_pass($_POST["usu_id"],$_POST["usu_pass"]);
+            break;
 
- 
     }
 ?>

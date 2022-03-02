@@ -96,6 +96,7 @@ function editar(usu_id){
         $('#usu_correo').val(data.usu_correo);
         $('#usu_pass').val(data.usu_pass);
         $('#rol_id').val(data.rol_id).trigger('change');
+        $('#usu_telf').val(data.usu_telf);
     }); 
 
     $('#modalmantenimiento').modal('show');
@@ -131,6 +132,7 @@ function eliminar(usu_id){
 }
 
 $(document).on("click","#btnnuevo", function(){
+    $('#usu_id').val('');
     $('#mdltitulo').html('Nuevo Registro');
     $('#usuario_form')[0].reset();
     $('#modalmantenimiento').modal('show');

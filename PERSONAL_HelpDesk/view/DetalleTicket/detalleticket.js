@@ -147,7 +147,16 @@ $(document).on("click","#btncerrarticket", function(){
             var usu_id = $('#user_idx').val();
             $.post("../../controller/ticket.php?op=update", { tick_id : tick_id,usu_id : usu_id }, function (data) {
 
-            }); 
+            });
+
+            $.post("../../controller/email.php?op=ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            });
+
+            $.post("../../controller/whatsapp.php?op=w_ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            });
+
 
             listardetalle(tick_id);
 
@@ -171,14 +180,16 @@ function listardetalle(tick_id){
         $('#lblestado').html(data.tick_estado);
         $('#lblnomusuario').html(data.usu_nom +' '+data.usu_ape);
         $('#lblfechcrea').html(data.fech_crea);
-        
+
         $('#lblnomidticket').html("Detalle Ticket - "+data.tick_id);
 
         $('#cat_nom').val(data.cat_nom);
+        $('#cats_nom').val(data.cats_nom);
         $('#tick_titulo').val(data.tick_titulo);
         $('#tickd_descripusu').summernote ('code',data.tick_descrip);
 
-        console.log( data.tick_estado_texto);
+        $('#prio_nom').val(data.prio_nom);
+
         if (data.tick_estado_texto == "Cerrado"){
             $('#pnldetalle').hide();
         }

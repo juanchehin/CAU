@@ -1,7 +1,7 @@
 <?php
     require_once("config/conexion.php");
     if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
-        require_once("models/usuario.php");
+        require_once("models/Usuario.php");
         $usuario = new Usuario();
         $usuario->login();
     }
@@ -30,9 +30,9 @@
     <div class="page-center">
         <div class="page-center-in">
             <div class="container-fluid">
-            
+
                 <form class="sign-box" action="" method="post" id="login_form">
-                    
+
                     <input type="hidden" id="rol_id" name="rol_id" value="1">
 
                     <div class="sign-avatar">
