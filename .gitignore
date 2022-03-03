@@ -1,2 +1,3 @@
 cau/public/document/*
 .env.php
+cau/logs/*

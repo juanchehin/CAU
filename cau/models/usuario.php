@@ -4,11 +4,12 @@
         public function login(){
             $conectar=parent::conexion();
             parent::set_names();
+
             if(isset($_POST["enviar"])){
                 $correo = $_POST["usu_correo"];
                 $pass = $_POST["usu_pass"];
                 $rol = $_POST["rol_id"];
-
+                
                 if(empty($correo) and empty($pass)){
                     header("Location:".conectar::ruta()."index.php?m=2");
 					exit();
@@ -160,6 +161,26 @@
             $sql->execute();
             return $resultado=$sql->fetchAll();
         } 
+
+        public function update_usuario_pass($usu_id,$usu_pass){
+            $conectar= parent::conexion();
+            parent::set_names();
+
+            $sql="UPDATE tm_usuarios
+                SET
+                    pass = MD5($usu_pass)
+                WHERE
+                    id = $usu_id";
+
+            file_put_contents('../logs/log.log', print_r($sql, true));
+
+
+            $sql=$conectar->prepare($sql);
+            // $sql->bindValue(1, $usu_pass);
+            // $sql->bindValue(2, $usu_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
 
     }
 ?>

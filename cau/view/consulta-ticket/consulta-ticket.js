@@ -1,8 +1,6 @@
 var tabla;
 var usu_id = $('#user_idx').val();
 var rol_id = $('#rol_idx').val();
-var usu_id = 1;
-var rol_id = 1;
 
 function init() {
     $("#ticket_form").on("submit", function(e) {
@@ -11,8 +9,8 @@ function init() {
 }
 
 $(document).ready(function() {
+
     $.post("../../controller/usuario.php?op=combo", function(data) {
-        console.log("data es : ", data);
         $('#usu_asig').html(data);
     });
 
@@ -126,16 +124,14 @@ $(document).ready(function() {
 
 });
 
-function ver(ticket_id) {
-    console.log(ticket_id);
-    window.open('http://localhost:80/cau/cau/view/detalle-ticket/?ID=' + ticket_id + '');
+function ver(tick_id) {
+    window.open('http://localhost/cau/cau/view/detalle-ticket/?ID=' + tick_id + '');
 }
 
 function asignar(tick_id) {
-
     $.post("../../controller/ticket.php?op=mostrar", { tick_id: tick_id }, function(data) {
         data = JSON.parse(data);
-        $('#tick_id').val(data.ticket_id);
+        $('#tick_id').val(data.tick_id);
 
         $('#mdltitulo').html('Asignar Agente');
         $("#modalasignar").modal('show');
@@ -146,7 +142,6 @@ function asignar(tick_id) {
 function guardar(e) {
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-
     $.ajax({
         url: "../../controller/ticket.php?op=asignar",
         type: "POST",
@@ -154,10 +149,50 @@ function guardar(e) {
         contentType: false,
         processData: false,
         success: function(datos) {
+            var tick_id = $('#tick_id').val();
+            $.post("../../controller/email.php?op=ticket_asignado", { tick_id: tick_id }, function(data) {
+
+            });
+
+            // $.post("../../controller/whatsapp.php?op=w_ticket_asignado", {tick_id : tick_id}, function (data) {
+
+            // });
+
+            swal("Correcto!", "Asignado Correctamente", "success");
+
             $("#modalasignar").modal('hide');
             $('#ticket_data').DataTable().ajax.reload();
         }
     });
+}
+
+function CambiarEstado(tick_id) {
+    swal({
+            title: "CAU",
+            text: "Esta seguro de Reabrir el Ticket?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-warning",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+            closeOnConfirm: false
+        },
+        function(isConfirm) {
+            if (isConfirm) {
+                $.post("../../controller/ticket.php?op=reabrir", { tick_id: tick_id, usu_id: usu_id }, function(data) {
+
+                });
+
+                $('#ticket_data').DataTable().ajax.reload();
+
+                swal({
+                    title: "CAU",
+                    text: "Ticket Abierto.",
+                    type: "success",
+                    confirmButtonClass: "btn-success"
+                });
+            }
+        });
 }
 
 init();
