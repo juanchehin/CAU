@@ -7,10 +7,10 @@
         case "guardaryeditar":
             
             if(empty($_POST["usu_id"])){
-                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"]);     
+                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"],$_POST["usu_telf"]);     
             }
             else {
-                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"]);
+                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_ape"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["rol_id"],$_POST["usu_telf"]);
             }
         break;
 
@@ -59,6 +59,7 @@
                     $output["usu_correo"] = $row["correo"];
                     $output["usu_pass"] = $row["pass"];
                     $output["rol_id"] = $row["rol_id"];
+                    $output["usu_telf"] = $row["usu_telf"];
                 }
                 echo json_encode($output);
             }   

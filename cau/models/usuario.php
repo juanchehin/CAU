@@ -40,7 +40,7 @@
             }
         }
 
-        public function insert_usuario($usu_nom,$usu_ape,$usu_correo,$usu_pass,$rol_id){
+        public function insert_usuario($usu_nom,$usu_ape,$usu_correo,$usu_pass,$rol_id,$usu_telf){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="INSERT INTO tm_usuarios 
@@ -49,18 +49,19 @@
                 apellidos, 
                 correo, 
                 pass, 
-                rol_id, 
+                rol_id,
+                usu_telf,
                 created_at, 
                 updated_at, 
                 deleted_at, 
                 estado) VALUES 
-                (NULL,'$usu_nom','$usu_ape','$usu_correo',MD5('$usu_pass'),$rol_id,now(), NULL, NULL, '1');";
+                (NULL,'$usu_nom','$usu_ape','$usu_correo',MD5('$usu_pass'),$rol_id,$usu_telf,now(), NULL, NULL, '1');";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
-        public function update_usuario($usu_id,$usu_nom,$usu_ape,$usu_correo,$usu_pass,$rol_id){
+        public function update_usuario($usu_id,$usu_nom,$usu_ape,$usu_correo,$usu_pass,$rol_id,$usu_telf){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE tm_usuarios set
@@ -68,7 +69,9 @@
                 apellidos = '$usu_ape',
                 correo = '$usu_correo',
                 pass = '$usu_pass',
-                rol_id = $rol_id
+                rol_id = $rol_id,
+                usu_telf = $usu_telf
+
                 WHERE
                 id = $usu_id";
             $sql=$conectar->prepare($sql);
