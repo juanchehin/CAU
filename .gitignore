@@ -1,3 +1,4 @@
 cau/public/document/*
 .env.php
 cau/logs
+PERSONAL_HelpDesk/docs
