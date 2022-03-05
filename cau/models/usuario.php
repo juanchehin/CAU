@@ -14,7 +14,7 @@
                     header("Location:".conectar::ruta()."index.php?m=2");
 					exit();
                 }else{
-                    $sql = "SELECT * FROM tm_usuarios WHERE correo='$correo' and pass='$pass' and rol_id=$rol and estado=1";
+                    $sql = "SELECT * FROM tm_usuarios WHERE correo='$correo' and pass=MD5('$pass') and rol_id=$rol and estado=1";
 
                     $stmt=$conectar->prepare($sql);
                     $stmt->execute();
@@ -29,6 +29,7 @@
                         $_SESSION["usu_nom"]=$resultado["nombres"];
                         $_SESSION["usu_ape"]=$resultado["apellidos"];
                         $_SESSION["rol_id"]=$resultado["rol_id"];
+
                         header("Location:".Conectar::ruta()."view/home/");
                         exit(); 
                     }else{

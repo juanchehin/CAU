@@ -179,6 +179,7 @@ function CambiarEstado(tick_id) {
         },
         function(isConfirm) {
             if (isConfirm) {
+                console.log("tick id es : ", tick_id);
                 $.post("../../controller/ticket.php?op=reabrir", { tick_id: tick_id, usu_id: usu_id }, function(data) {
 
                 });

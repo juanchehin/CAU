@@ -46,8 +46,13 @@
         break;
 
         case "update":
-            $ticket->update_ticket($_POST["tick_id"]);
+            $ticket->update_ticket($_POST["ticket_id"]);
             $ticket->insert_ticketdetalle_cerrar($_POST["ticket_id"],$_POST["usu_id"]);
+        break;
+
+        case "reabrir":
+            $ticket->reabrir_ticket($_POST["tick_id"]);
+            // $ticket->insert_ticketdetalle_reabrir($_POST["ticket_id"],$_POST["usu_id"]);
         break;
 
         case "asignar":
@@ -67,7 +72,7 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
-                    $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
+                    $sub_array[] = '<a onClick="CambiarEstado('.$row["ticket_id"].')"><span class="label label-pill label-danger">Cerrado</span></a>';
                 }
 
                 $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));               
@@ -113,7 +118,7 @@
                 if ($row["tick_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
-                    $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
+                    $sub_array[] = '<a onClick="CambiarEstado('.$row["ticket_id"].')"><span class="label label-pill label-danger">Cerrado</span><a>';
                 }
 
                 $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));

@@ -193,6 +193,23 @@
             return $resultado=$sql->fetchAll();
         }
 
+        public function reabrir_ticket($tick_id){
+            $conectar= parent::conexion();
+            parent::set_names();
+
+            $sql="update tm_ticket 
+                set	
+                    tick_estado = 'Abierto'
+                where
+                    ticket_id = $tick_id";
+            $sql=$conectar->prepare($sql);
+            // $sql->bindValue(1, $tick_id);
+            file_put_contents('../logs/log.log', print_r($sql, true));
+
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
         public function update_ticket_asignacion($tick_id,$usu_asig){
             
             $conectar= parent::conexion();
