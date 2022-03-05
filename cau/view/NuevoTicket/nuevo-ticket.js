@@ -1,3 +1,10 @@
+
+function init(){
+    $("#ticket_form").on("submit",function(e){
+        guardaryeditar(e);
+    });
+}
+
 $(document).ready(function() {
     $('#tick_descrip').summernote({
         height: 150,
@@ -25,14 +32,20 @@ $(document).ready(function() {
         $('#cat_id').html(data);
     });
 
-});
+    $("#cat_id").change(function(){
+        cat_id = $(this).val();
 
-function init() {
-    $("#ticket_form").on("submit", function(e) {
-        guardaryeditar(e);
+        $.post("../../controller/subcategoria.php?op=combo",{cat_id : cat_id},function(data, status){
+            console.log(data);
+            $('#cats_id').html(data);
+        });
     });
 
-}
+    $.post("../../controller/prioridad.php?op=combo",function(data, status){
+        $('#prio_id').html(data);
+    });
+
+});
 
 function guardaryeditar(e) {
     e.preventDefault();
