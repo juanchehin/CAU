@@ -1,7 +1,7 @@
 <?php
     class Ticket extends Conectar{
 
-        public function insert_ticket($usu_id,$cat_id,$tick_titulo,$tick_descrip){
+        public function insert_ticket($usu_id,$cat_id,$cats_id,$tick_titulo,$tick_descrip){
 
             $conectar= parent::conexion();
             parent::set_names();
@@ -10,6 +10,7 @@
                 ticket_id,
                 usu_id,
                 cat_id,
+                cats_id,
                 tick_titulo,
                 tick_description,
                 est,
@@ -22,6 +23,7 @@
                 NULL,
                 $usu_id,
                 $cat_id,
+                $cats_id,
                 '$tick_titulo',
                 '$tick_descrip',
                 '1',
@@ -82,6 +84,7 @@
                 tm_ticket.ticket_id,
                 tm_ticket.usu_id,
                 tm_ticket.cat_id,
+                tm_ticket.cats_id,
                 tm_ticket.tick_titulo,
                 tm_ticket.tick_description,
                 tm_ticket.tick_estado,
@@ -90,9 +93,11 @@
                 tm_usuarios.correo,
                 tm_usuarios.apellidos,
                 tm_categoria.cat_nom
+                tm_subcategoria.cats_nom,
                 FROM 
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
+                INNER join tm_subcategoria on tm_ticket.cats_id = tm_subcategoria.cats_id
                 INNER join tm_usuarios on tm_ticket.usu_id = tm_usuarios.id
                 WHERE
                 tm_ticket.est = 1

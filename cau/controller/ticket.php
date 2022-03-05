@@ -13,7 +13,7 @@
 
         case "insert":
 
-            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);
+            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["cats_id"],$_POST["tick_titulo"],$_POST["tick_descrip"]);
             
             if (is_array($datos)==true and count($datos)>0){
                 foreach ($datos as $row){
