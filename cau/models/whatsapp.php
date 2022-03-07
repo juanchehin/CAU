@@ -24,13 +24,15 @@ class Whastapp extends Conectar{
 
         $data = json_encode(
             array(
-                'chatId'=>"".$telefono."@c.us",
+                // 'chatId'=>"".$telefono."@c.us",
+                "phone" => "".$telefono. "",
                 'body'=>"Ticket Abierto ".$id." : ".$titulo." Categoria : ".$categoria." SubCategoria : ".$subcategoria.""
             )
         );
 
-        $url = $apiURL.'message?token='.$token;
+        $url = $apiURL.'sendMessage?token='.$token;
 
+        file_put_contents('../logs/log.log', print_r($url, true));
 
         $options = stream_context_create(
             array('http' =>
@@ -43,8 +45,6 @@ class Whastapp extends Conectar{
         );
 
         $response = file_get_contents($url,false,$options);
-
-        file_put_contents('../logs/log.log', print_r($response, true));
 
         echo $response; exit;
     }
@@ -59,7 +59,7 @@ class Whastapp extends Conectar{
         }
 
         $apiURL = 'https://api.chat-api.com/instance413970/';
-        $token = ' ';
+        $token = '';
 
         $data = json_encode(
             array(
