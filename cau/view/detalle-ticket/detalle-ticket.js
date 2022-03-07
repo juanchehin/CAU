@@ -150,7 +150,16 @@ $(document).on("click", "#btncerrarticket", function() {
 
                 });
 
-                listardetalle(tick_id);
+            $.post("../../controller/email.php?op=ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            });
+
+            $.post("../../controller/whatsapp.php?op=w_ticket_cerrado", {tick_id : tick_id}, function (data) {
+
+            });
+
+
+            listardetalle(tick_id);
 
                 swal({
                     title: "CAU",
@@ -180,8 +189,9 @@ function listardetalle(tick_id) {
         $('#tick_titulo').val(data.tick_titulo);
         $('#tickd_descripusu').summernote('code', data.tick_description);
 
-        console.log(data.tick_estado_texto);
-        if (data.tick_estado_texto == "Cerrado") {
+        $('#prio_nom').val(data.prio_nom);
+
+        if (data.tick_estado_texto == "Cerrado"){
             $('#pnldetalle').hide();
         }
     });

@@ -1,7 +1,7 @@
 <?php
     class Ticket extends Conectar{
 
-        public function insert_ticket($usu_id,$cat_id,$cats_id,$tick_titulo,$tick_descrip){
+        public function insert_ticket($usu_id,$cat_id,$cats_id,$tick_titulo,$tick_descrip,$prio_id){
 
             $conectar= parent::conexion();
             parent::set_names();
@@ -17,7 +17,8 @@
                 fech_crea,
                 tick_estado,
                 usu_asig,
-                fech_asig
+                fech_asig,
+                prio_id
                 ) 
             VALUES (
                 NULL,
@@ -30,7 +31,8 @@
                 now(),
                 'Abierto',
                 NULL,
-                NULL                
+                NULL,
+                $prio_id             
                 );";
 
             $sql=$conectar->prepare($sql);
@@ -54,17 +56,21 @@
                 tm_ticket.tick_description,
                 tm_ticket.tick_estado,
                 tm_ticket.fech_crea,
+                tm_ticket.fech_cierre,
                 tm_ticket.usu_asig,
                 tm_ticket.fech_asig,
                 tm_usuarios.nombres,
                 tm_usuarios.apellidos,
                 -- tm_ticket.est,
                 -- tm_ticket.tick_estado,
+                tm_ticket.prio_id,
+                tm_ticket.prio_nom
                 tm_categoria.cat_nom
                 FROM
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
                 INNER join tm_usuarios on tm_ticket.usu_id = tm_usuarios.id
+                INNER join tm_prioridad on tm_ticket.prio_id = tm_prioridad.prio_id
                 WHERE
                 tm_ticket.est = 1
                 AND tm_usuarios.id=$usu_id";
@@ -89,17 +95,22 @@
                 tm_ticket.tick_description,
                 tm_ticket.tick_estado,
                 tm_ticket.fech_crea,
+                tm_ticket.fech_cierre,
                 tm_usuarios.nombres,
                 tm_usuarios.correo,
                 tm_usuarios.usu_telf,
                 tm_usuarios.apellidos,
                 tm_categoria.cat_nom,
-                tm_subcategoria.cats_nom
+                tm_subcategoria.cats_nom,
+                tm_ticket.prio_id,
+                tm_ticket.prio_nom
+                -- tm_categoria.cat_nom
                 FROM 
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
                 INNER join tm_subcategoria on tm_ticket.cats_id = tm_subcategoria.cats_id
                 INNER join tm_usuarios on tm_ticket.usu_id = tm_usuarios.id
+                INNER join tm_prioridad on tm_ticket.prio_id = tm_prioridad.prio_id
                 WHERE
                 tm_ticket.est = 1
                 AND tm_ticket.ticket_id = $tick_id";
@@ -121,15 +132,19 @@
                 tm_ticket.tick_description,
                 tm_ticket.tick_estado,
                 tm_ticket.fech_crea,
+                tm_ticket.fech_cierre,
                 tm_ticket.usu_asig,
                 tm_ticket.fech_asig,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_ape,
-                tm_categoria.cat_nom
+                tm_categoria.cat_nom,
+                tm_ticket.prio_id,
+                tm_ticket.prio_nom
                 FROM 
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
                 INNER join tm_usuarios on tm_ticket.usu_id = tm_usuarios.id
+                INNER join tm_prioridad on tm_ticket.prio_id = tm_prioridad.prio_id
                 WHERE
                 tm_ticket.est = 1
                 ";
@@ -278,5 +293,24 @@
             return $resultado=$sql->fetchAll();
         } 
 */
+        public function insert_encuesta($tick_id,$tick_estre,$tick_comment){
+            $conectar= parent::conexion();
+            parent::set_names();
+            $sql="update tm_ticket 
+                set	
+                    tick_estre = $tick_estre,
+                    tick_comment = $tick_comment
+                where
+                    tick_id = $tick_id";
+
+            $sql=$conectar->prepare($sql);
+
+            // $sql->bindValue(1, $tick_estre);
+            // $sql->bindValue(2, $tick_comment);
+            // $sql->bindValue(3, $tick_id);
+
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
     }
 ?>
