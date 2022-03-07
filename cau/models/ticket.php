@@ -91,9 +91,10 @@
                 tm_ticket.fech_crea,
                 tm_usuarios.nombres,
                 tm_usuarios.correo,
+                tm_usuarios.usu_telf,
                 tm_usuarios.apellidos,
-                tm_categoria.cat_nom
-                tm_subcategoria.cats_nom,
+                tm_categoria.cat_nom,
+                tm_subcategoria.cats_nom
                 FROM 
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
