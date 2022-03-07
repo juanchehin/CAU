@@ -189,9 +189,12 @@
             parent::set_names();
             $sql="update tm_ticket 
                 set	
-                    tick_estado = 'Cerrado'
+                    tick_estado = 'Cerrado',
+                    fech_cierre = now()
                 where
                     ticket_id = $tick_id";
+
+            file_put_contents('../logs/log.log', print_r($sql, true));
 
             $sql=$conectar->prepare($sql);
             // $sql->bindValue(1, $tick_id);

@@ -46,7 +46,7 @@
         break;
 
         case "update":
-            $ticket->update_ticket($_POST["ticket_id"]);
+            $ticket->update_ticket($_POST["tick_id"]);
             $ticket->insert_ticketdetalle_cerrar($_POST["ticket_id"],$_POST["usu_id"]);
         break;
 
