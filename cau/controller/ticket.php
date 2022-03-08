@@ -214,7 +214,11 @@
 
         case "mostrar";
 
+        file_put_contents('../logs/log.log', print_r($_POST["tick_id"], true));
+
             $datos=$ticket->listar_ticket_x_id($_POST["tick_id"]);
+
+
 
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
@@ -241,6 +245,8 @@
                     $output["cat_nom"] = $row["cat_nom"];
                     $output["prio_nom"] = $row["prio_nom"];
                 }
+
+
 
                 echo json_encode($output);
             }   

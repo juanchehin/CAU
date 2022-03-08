@@ -150,16 +150,16 @@ $(document).on("click", "#btncerrarticket", function() {
 
                 });
 
-            $.post("../../controller/email.php?op=ticket_cerrado", {tick_id : tick_id}, function (data) {
+                $.post("../../controller/email.php?op=ticket_cerrado", { tick_id: tick_id }, function(data) {
 
-            });
+                });
 
-            $.post("../../controller/whatsapp.php?op=w_ticket_cerrado", {tick_id : tick_id}, function (data) {
+                $.post("../../controller/whatsapp.php?op=w_ticket_cerrado", { tick_id: tick_id }, function(data) {
 
-            });
+                });
 
 
-            listardetalle(tick_id);
+                listardetalle(tick_id);
 
                 swal({
                     title: "CAU",
@@ -172,11 +172,15 @@ $(document).on("click", "#btncerrarticket", function() {
 });
 
 function listardetalle(tick_id) {
+
+    console.log("tick_id: " + tick_id);
     $.post("../../controller/ticket.php?op=listardetalle", { tick_id: tick_id }, function(data) {
         $('#lbldetalle').html(data);
     });
 
     $.post("../../controller/ticket.php?op=mostrar", { tick_id: tick_id }, function(data) {
+        console.log("data: " + data);
+
         data = JSON.parse(data);
         $('#lblestado').html(data.tick_estado);
         $('#lblnomusuario').html(data.nombres + ' ' + data.apellidos);
@@ -191,7 +195,7 @@ function listardetalle(tick_id) {
 
         $('#prio_nom').val(data.prio_nom);
 
-        if (data.tick_estado_texto == "Cerrado"){
+        if (data.tick_estado_texto == "Cerrado") {
             $('#pnldetalle').hide();
         }
     });

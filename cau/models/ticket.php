@@ -96,15 +96,16 @@
                 tm_ticket.tick_estado,
                 tm_ticket.fech_crea,
                 tm_ticket.fech_cierre,
+                tm_ticket.tick_estre,
+                tm_ticket.tick_comment,
                 tm_usuarios.nombres,
+                tm_usuarios.apellidos,
                 tm_usuarios.correo,
                 tm_usuarios.usu_telf,
-                tm_usuarios.apellidos,
                 tm_categoria.cat_nom,
                 tm_subcategoria.cats_nom,
                 tm_ticket.prio_id,
-                tm_ticket.prio_nom
-                -- tm_categoria.cat_nom
+                tm_prioridad.prio_nom
                 FROM 
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
@@ -160,16 +161,17 @@
                 td_ticketdetalle.tickd_id,
                 td_ticketdetalle.tickd_descrip,
                 td_ticketdetalle.fech_crea,
-                tm_usuario.usu_nom,
-                tm_usuario.usu_ape,
-                tm_usuario.rol_id
+                tm_usuarios.nombres,
+                tm_usuarios.apellidos,
+                tm_usuarios.id
                 FROM 
                 td_ticketdetalle
-                INNER join tm_usuario on td_ticketdetalle.usu_id = tm_usuario.usu_id
+                INNER join tm_usuarios on td_ticketdetalle.usu_id = tm_usuarios.id
                 WHERE 
-                tick_id =?";
+                tick_id =$tick_id";
+
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $tick_id);
+            // $sql->bindValue(1, $tick_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
