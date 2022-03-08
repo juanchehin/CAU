@@ -64,7 +64,7 @@
                 -- tm_ticket.est,
                 -- tm_ticket.tick_estado,
                 tm_ticket.prio_id,
-                tm_ticket.prio_nom
+                tm_prioridad.prio_nom,
                 tm_categoria.cat_nom
                 FROM
                 tm_ticket

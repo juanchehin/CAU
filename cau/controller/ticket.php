@@ -3,7 +3,7 @@
     require_once("../models/ticket.php");
     $ticket = new Ticket();
 
-    require_once("../models/Usuario.php");
+    require_once("../models/usuario.php");
     $usuario = new Usuario();
 
     require_once("../models/documento.php");
@@ -61,6 +61,7 @@
 
         case "listar_x_usu":
             $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"]);
+
             $data= Array();
 
             foreach($datos as $row){
@@ -116,6 +117,9 @@
 
         case "listar":
             $datos=$ticket->listar_ticket();
+
+
+
             $data= Array();
             foreach($datos as $row){
                 $sub_array = array();
