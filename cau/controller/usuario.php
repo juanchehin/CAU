@@ -16,14 +16,14 @@
 
         case "listar":
             $datos=$usuario->get_usuario();
-
+            
             $data= Array();
             foreach($datos as $row){
                 $sub_array = array();
                 $sub_array[] = $row["nombres"];
                 $sub_array[] = $row["apellidos"];
                 $sub_array[] = $row["correo"];
-                $sub_array[] = $row["pass"];
+                $sub_array[] = $row["usu_telf"];
 
                 if ($row["rol_id"]=="1"){
                     $sub_array[] = '<span class="label label-pill label-success">Usuario</span>';
@@ -36,11 +36,15 @@
                 $data[] = $sub_array;
             }
 
+
+
             $results = array(
                 "sEcho"=>1,
                 "iTotalRecords"=>count($data),
                 "iTotalDisplayRecords"=>count($data),
                 "aaData"=>$data);
+
+
             echo json_encode($results);
         break;
 

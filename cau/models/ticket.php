@@ -125,7 +125,7 @@
             $conectar= parent::conexion();
             parent::set_names();
             $sql="SELECT
-                tm_ticket.tick_id,
+                tm_ticket.ticket_id,
                 tm_ticket.usu_id,
                 tm_ticket.cat_id,
                 tm_ticket.tick_titulo,
@@ -135,11 +135,11 @@
                 tm_ticket.fech_cierre,
                 tm_ticket.usu_asig,
                 tm_ticket.fech_asig,
-                tm_usuario.usu_nom,
-                tm_usuario.usu_ape,
+                tm_usuarios.nombres,
+                tm_usuarios.apellidos,
                 tm_categoria.cat_nom,
                 tm_ticket.prio_id,
-                tm_ticket.prio_nom
+                tm_prioridad.prio_nom
                 FROM 
                 tm_ticket
                 INNER join tm_categoria on tm_ticket.cat_id = tm_categoria.cat_id
