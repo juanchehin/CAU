@@ -68,7 +68,7 @@
                 nombres = '$usu_nom',
                 apellidos = '$usu_ape',
                 correo = '$usu_correo',
-                pass = '$usu_pass',
+                pass = MD5('$usu_pass'),
                 rol_id = $rol_id,
                 usu_telf = $usu_telf
 
